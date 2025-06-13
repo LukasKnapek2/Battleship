@@ -121,12 +121,16 @@ export function createGameboard() {
         return board;
     }
 
+    function getShips() {
+        return ships;
+    }   
     return {
         placeShip,
         receiveAttack,
         getShipAt,
         getMissedAttacks,
         allShipsSunk,
-        getBoard
+        getBoard,
+        getShips
     };
 }
