@@ -1,30 +1,45 @@
-export function createShip(length, name = 'Unnamed Ship') {
+// ship.js (Updated)
+
+export function createShip(length, name = "Unnamed Ship") {
   if (length <= 0) {
-    throw new Error('Ship length must be greater than zero');
+    throw new Error("Ship length must be greater than zero");
   }
-  const hits = Array(length).fill(false);
-  let sunk = false;
 
-  function hit(position) {
-    if (position < 0 || position >= length) {
-      throw new Error('Position out of bounds');
+  const shipLength = length;
+  const shipName = name;
+  const hitSegments = Array(shipLength).fill(false);
+
+
+  function hit(segmentIndex) {
+    if (segmentIndex < 0 || segmentIndex >= shipLength) {
+      throw new Error("Position out of bounds");
     }
-    hits[position] = true;
-    checkSunk();
+    if (hitSegments[segmentIndex] === true) {
+      return false;
+    }
+    hitSegments[segmentIndex] = true;
+    return true;
   }
 
-  function checkSunk() {
-    sunk = hits.every(hit => hit);
-  }
 
   function isSunk() {
-    return sunk;
+    return hitSegments.every((segment) => segment === true);
   }
 
+
+  function getHitsCount() {
+    return hitSegments.filter((segment) => segment === true).length;
+  }
+
+  function getHitSegments() {
+    return [...hitSegments];
+  }
   return {
-    name,
-    length,
+    length: shipLength,
+    name: shipName,
     hit,
     isSunk,
+    getHitsCount,
+    getHitSegments
   };
 }
