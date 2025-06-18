@@ -19,11 +19,11 @@ body {
 
 .gameboard {
     display: grid;
-    grid-template-columns: repeat(10, 30px); /* 10 columns, 30px each */
-    grid-template-rows: repeat(10, 30px);    /* 10 rows, 30px each */
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
     border: 1px solid #333;
-    width: 300px; /* 10 * 30px */
-    height: 300px; /* 10 * 30px */
+    width: 300px;
+    height: 300px;
     background-color: #e0e0e0;
 }
 
@@ -31,44 +31,42 @@ body {
     width: 30px;
     height: 30px;
     border: 1px solid #bbb;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.8em;
-    cursor: default; /* Default cursor for own board */
+    cursor: default;
 }
 
-/* Cell states */
 .cell.ship {
-    background-color: #6a6a6a; /* Player's own ship */
+    background-color: #6a6a6a;
 }
 
 .cell.hit {
-    background-color: #ff6b6b; /* Hit ship segment */
+    background-color: #ff6b6b;
 }
 
 .cell.miss {
-    background-color: #a0c4ff; /* Missed shot */
+    background-color: #a0c4ff;
     position: relative;
 }
 .cell.miss::before {
-    content: '•'; /* A dot for missed shots */
+    content: '•';
     font-size: 2em;
     color: #4a4a4a;
 }
 
-/* Opponent's board clickable cells */
 .clickable-cell {
     cursor: crosshair;
 }
 .clickable-cell:hover {
-    background-color: #cceeff; /* Light blue on hover for un-attacked cells */
+    background-color: #cceeff;
 }
 
 .clickable-cell.hit:hover,
 .clickable-cell.miss:hover {
-    background-color: inherit; /* Don't change color on hover if already hit/missed */
+    background-color: inherit;
     cursor: not-allowed;
 }
 
@@ -96,4 +94,87 @@ body {
 
 #start-game-btn:hover {
     background-color: #45a049;
+}
+
+.placement-tools {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+#ships-to-place {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.draggable-ship {
+    background-color: #555;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transition: transform 0.1s ease-out;
+}
+
+.draggable-ship.vertical {
+    flex-direction: column;
+}
+
+.draggable-ship-segment {
+    width: 28px;
+    height: 28px;
+    background-color: #777;
+    border: 1px solid #999;
+}
+
+.draggable-ship.dragging {
+    opacity: 0.7;
+    transform: scale(1.05);
+    cursor: grabbing;
+}
+
+.cell.placement-preview {
+    background-color: #aaddaa !important;
+    opacity: 0.8;
+}
+
+.cell.placement-preview-invalid {
+    background-color: #ffaaaa !important;
+    opacity: 0.8;
+}
+
+body.dragging-ship .gameboard .cell {
+    cursor: grabbing;
+}
+
+.game-state-placement #opponent-board-container .cell {
+    pointer-events: none;
+    cursor: default;
+}
+
+.game-state-placement #player-board-container .cell {
+    cursor: grab;
+}
+
+.game-state-playing .placement-tools,
+.game-state-game_over .placement-tools {
+    display: none;
+}
+
+.game-state-playing #start-game-btn,
+.game-state-game_over #start-game-btn {
+    display: none;
 }

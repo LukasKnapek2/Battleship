@@ -1,15 +1,10 @@
 // src/index.js
-import { gameController } from './gameController.js'; // Assuming gameController is exported as a named export
+import { gameController } from './gameController.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    // You might want a "Start Game" button to trigger initGame
-    const startGameButton = document.getElementById('start-game-btn');
-    if (startGameButton) {
-        startGameButton.addEventListener('click', () => {
-            gameController.initGame();
-        });
-    } else {
-        // If no button, initialize immediately (for development)
-        gameController.initGame();
-    }
+    // Initialize the game controller once the DOM is fully loaded.
+    // The gameController will handle the "Start Game" button internally
+    // to transition from placement to the playing phase.
+    gameController.initGame();
 });

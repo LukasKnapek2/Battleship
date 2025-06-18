@@ -13,10 +13,17 @@
             <h2>Your Board</h2>
             <div id="player-board-container" class="gameboard"></div>
         </div>
+
         <div class="message-area">
             <p id="message">Place your ships!</p>
-            <button id="start-game-btn">Start Game</button>
+            <div class="placement-tools">
+                <div id="ships-to-place">
+                </div>
+                <button id="rotate-ship-btn">Rotate Ship (Horizontal)</button>
+            </div>
+            <button id="start-game-btn" disabled>Start Game</button>
         </div>
+
         <div class="player-area">
             <h2>Enemy Board</h2>
             <div id="opponent-board-container" class="gameboard"></div>
