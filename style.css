@@ -131,6 +131,7 @@ body {
 
 .draggable-ship.vertical {
     flex-direction: column;
+    height: fit-content;
 }
 
 .draggable-ship-segment {
